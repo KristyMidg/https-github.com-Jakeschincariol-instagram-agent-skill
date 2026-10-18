@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reelsmith</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Montserrat:wght@900&family=Anton&family=Bebas+Neue&family=Bangers&family=Luckiest+Guy&family=Archivo+Black&family=Poppins:wght@800&family=Permanent+Marker&family=Playfair+Display:wght@900&family=Righteous&family=Rubik+Mono+One&family=Caveat:wght@700&family=Pacifico&family=Oswald:wght@700&family=Courier+Prime:wght@700&family=DM+Sans:wght@700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <span class="tally" aria-hidden="true"></span>
+    <strong>Reelsmith</strong>
+    <span class="brand-sub">raw footage in, finished reel out</span>
+  </div>
+  <div class="bar-actions">
+    <label class="btn" for="file-video">Open video</label>
+    <input type="file" id="file-video" accept="video/*" hidden>
+    <label class="select-wrap" title="Output format">
+      <span class="sr-only">Format</span>
+      <select id="aspect">
+        <option value="9:16">9:16 Reel / TikTok / Short</option>
+        <option value="4:5">4:5 Feed post</option>
+        <option value="1:1">1:1 Square</option>
+        <option value="16:9">16:9 YouTube</option>
+      </select>
+    </label>
+    <button class="btn" id="btn-undo" title="Undo (Ctrl+Z)">Undo</button>
+    <button class="btn" id="btn-save" title="Download the edit as a project file">Save project</button>
+    <label class="btn" for="file-project">Open project</label>
+    <input type="file" id="file-project" accept="application/json,.json" hidden>
+    <button class="btn magic" id="btn-auto">Make it spectacular</button>
+    <button class="btn primary" id="btn-export">Export video</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <aside class="tools" aria-label="Tools">
+    <nav class="tabs" role="tablist">
+      <button role="tab" class="tab active" data-tab="captions" id="tab-captions">Captions</button>
+      <button role="tab" class="tab" data-tab="graphics" id="tab-graphics">Text &amp; graphics</button>
+      <button role="tab" class="tab" data-tab="effects" id="tab-effects">Effects</button>
+      <button role="tab" class="tab" data-tab="look" id="tab-look">Look</button>
+      <button role="tab" class="tab" data-tab="sound" id="tab-sound">Sound</button>
+    </nav>
+
+    <section class="panel" data-panel="captions">
+      <div class="group">
+        <h3>Get captions</h3>
+        <div class="row">
+          <select id="cap-lang" aria-label="Spoken language">
+            <option value="auto">Detect language</option>
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="portuguese">Portuguese</option>
+            <option value="italian">Italian</option>
+          </select>
+          <button class="btn primary" id="btn-transcribe">Auto-caption</button>
+        </div>
+        <p class="hint" id="cap-status">Whisper runs inside your browser, so your footage never leaves your computer.</p>
+        <details>
+          <summary>Paste your script instead</summary>
+          <textarea id="cap-paste" rows="4" placeholder="Paste what you said. Reelsmith spreads the words over the parts of the clip where you are talking."></textarea>
+          <button class="btn" id="btn-fit">Time it to my voice</button>
+        </details>
+        <div class="row wrap">
+          <label class="btn small" for="file-subs">Import .srt / .vtt</label>
+          <input type="file" id="file-subs" accept=".srt,.vtt,text/vtt" hidden>
+          <button class="btn small" id="btn-srt">Download .srt</button>
+          <button class="btn small" id="btn-cap-add">Add line at playhead</button>
+          <button class="btn small danger" id="btn-cap-clear">Clear</button>
+        </div>
+      </div>
+      <div class="group">
+        <h3>Caption style</h3>
+        <div class="chips" id="cap-presets"></div>
+        <div class="fields" id="cap-style"></div>
+      </div>
+      <div class="group">
+        <h3>Lines <span class="count" id="cap-count"></span></h3>
+        <ol class="cap-list" id="cap-list"></ol>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="graphics" hidden>
+      <div class="group">
+        <h3>Text templates</h3>
+        <p class="hint">Added at the playhead. Drag them around on the video.</p>
+        <div class="tiles" id="tpl-grid"></div>
+      </div>
+      <div class="group">
+        <h3>Stickers</h3>
+        <div class="emoji-grid" id="emoji-grid"></div>
+      </div>
+      <div class="group">
+        <h3>Logo or image</h3>
+        <label class="btn" for="file-image">Add image</label>
+        <input type="file" id="file-image" accept="image/*" hidden>
+      </div>
+      <div class="group">
+        <h3>Progress bar</h3>
+        <div class="fields" id="progress-fields"></div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="effects" hidden>
+      <div class="group">
+        <h3>Video effects</h3>
+        <p class="hint">Each one lands at the playhead. Stretch it on the timeline to change how long it lasts.</p>
+        <div class="tiles" id="fx-grid"></div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="look" hidden>
+      <div class="group">
+        <h3>Color grade</h3>
+        <div class="chips" id="look-presets"></div>
+      </div>
+      <div class="group">
+        <h3>Adjust</h3>
+        <div class="fields" id="look-fields"></div>
+      </div>
+      <div class="group">
+        <h3>Framing</h3>
+        <p class="hint">Shot sideways? Fill the frame and slide the crop to keep your face in shot.</p>
+        <div class="fields" id="frame-fields"></div>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="sound" hidden>
+      <div class="group">
+        <h3>Sound effects</h3>
+        <p class="hint">Tap a name to hear it. Plus drops it at the playhead.</p>
+        <ul class="sfx-list" id="sfx-list"></ul>
+        <label class="btn small" for="file-sfx">Upload your own sound</label>
+        <input type="file" id="file-sfx" accept="audio/*" hidden>
+      </div>
+      <div class="group">
+        <h3>Music</h3>
+        <div class="row">
+          <label class="btn small" for="file-music">Add music track</label>
+          <input type="file" id="file-music" accept="audio/*" hidden>
+          <span class="hint" id="music-name">No music yet</span>
+        </div>
+        <div class="fields" id="audio-fields"></div>
+      </div>
+    </section>
+  </aside>
+
+  <section class="stage-wrap" aria-label="Preview">
+    <div class="stage" id="stage-box">
+      <canvas id="stage" width="1080" height="1920"></canvas>
+      <div class="dropzone" id="dropzone">
+        <div class="drop-card">
+          <p class="drop-title">Drop your raw footage here</p>
+          <p class="hint">MP4, MOV or WebM from your phone or camera. Everything stays on this computer.</p>
+          <label class="btn primary" for="file-video">Choose a video</label>
+          <ol class="steps">
+            <li><b>Auto-caption</b> transcribes what you say, word by word.</li>
+            <li><b>Make it spectacular</b> adds a hook title, zooms, sound hits, stickers and a grade.</li>
+            <li><b>Tweak</b> anything on the timeline, then export a finished MP4.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="transport">
+      <button class="btn icon" id="btn-back" title="Back to start" aria-label="Back to start">&#9198;</button>
+      <button class="btn icon play" id="btn-play" title="Play / pause (Space)" aria-label="Play">&#9654;</button>
+      <span class="clock" id="clock">00:00.00 / 00:00.00</span>
+    </div>
+  </section>
+
+  <aside class="inspector" id="inspector" aria-label="Inspector"></aside>
+</main>
+
+<section class="timeline" aria-label="Timeline">
+  <div class="tl-head">
+    <span class="tl-title">Timeline</span>
+    <label class="tl-zoom">Zoom <input type="range" id="tl-zoom" min="8" max="240" value="60"></label>
+  </div>
+  <div class="tl-body" id="tl-body">
+    <div class="tl-labels" id="tl-labels"></div>
+    <div class="tl-scroll" id="tl-scroll">
+      <div class="tl-inner" id="tl-inner"></div>
+    </div>
+  </div>
+</section>
+
+<dialog id="dlg-auto">
+  <form method="dialog" id="form-auto">
+    <h2>Make it spectacular</h2>
+    <p class="hint">Builds a full edit from your clip. Run it again for a different take, and anything it adds can be changed on the timeline.</p>
+    <fieldset class="vibes">
+      <legend>Vibe</legend>
+      <label><input type="radio" name="vibe" value="energetic" checked><span><b>Energetic</b>Punch-ins, whooshes, bold captions</span></label>
+      <label><input type="radio" name="vibe" value="cinematic"><span><b>Cinematic</b>Slow pushes, film grade, fades</span></label>
+      <label><input type="radio" name="vibe" value="clean"><span><b>Clean</b>Bright and tidy, gentle motion</span></label>
+    </fieldset>
+    <label class="field"><span>Hook title (first 3 seconds)</span><input type="text" id="auto-hook" maxlength="60"></label>
+    <label class="field"><span>Call to action (last seconds)</span><input type="text" id="auto-cta" maxlength="60" value="Follow for more"></label>
+    <fieldset class="checks">
+      <legend>Include</legend>
+      <label><input type="checkbox" id="auto-look" checked> Color grade</label>
+      <label><input type="checkbox" id="auto-capstyle" checked> Caption style</label>
+      <label><input type="checkbox" id="auto-effects" checked> Zooms &amp; effects</label>
+      <label><input type="checkbox" id="auto-sfx" checked> Sound effects</label>
+      <label><input type="checkbox" id="auto-emoji" checked> Emoji stickers</label>
+      <label><input type="checkbox" id="auto-progress" checked> Progress bar</label>
+    </fieldset>
+    <p class="hint" id="auto-note"></p>
+    <div class="row end">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn magic" value="apply" id="auto-apply">Build the edit</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlg-export">
+  <div id="exp-progress">
+    <h2>Exporting</h2>
+    <p class="hint">Rendering in real time with sound. Keep this tab open and visible until it finishes.</p>
+    <div class="meter"><div class="meter-fill" id="exp-bar"></div></div>
+    <p class="clock" id="exp-clock"></p>
+    <div class="row end"><button class="btn danger" id="exp-cancel">Cancel</button></div>
+  </div>
+  <div id="exp-done" hidden>
+    <h2>Your reel is ready</h2>
+    <video id="exp-video" controls playsinline></video>
+    <p class="hint" id="exp-info"></p>
+    <div class="row end">
+      <button class="btn" id="exp-close">Back to editing</button>
+      <a class="btn primary" id="exp-download" download="reel.mp4">Download</a>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<video id="video" playsinline preload="auto" hidden></video>
+<audio id="music" preload="auto" hidden></audio>
+
+<script src="js/sfx.js"></script>
+<script src="js/render.js"></script>
+<script src="js/captions.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
