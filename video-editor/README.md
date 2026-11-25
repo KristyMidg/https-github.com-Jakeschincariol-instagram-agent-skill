@@ -1,4 +1,4 @@
-# Reelsmith
+# Reelsmith Studio
 
 A video editor that runs in your browser. Give it raw footage and it gives you back a finished vertical reel with captions, titles, stickers, zooms, a color grade, sound effects and music.
 
@@ -18,17 +18,26 @@ Use Chrome or Edge to export MP4 (H.264). Browsers without an H.264 recorder exp
 
 ## The fast path
 
-1. **Open video**, or drag a clip onto the preview.
-2. **Captions → Auto-caption**. This runs Whisper in your browser and gives you timings for every word. The first run downloads the speech model (80 to 150 MB), and after that it is cached. If you'd rather not download it, paste your script and click **Time it to my voice**, or import an `.srt` / `.vtt` file.
-3. **Make it spectacular**. Pick a vibe (Energetic, Cinematic or Clean) and it builds the whole edit for you:
-   - a hook title for the first 3 seconds and a call to action at the end
-   - punch-in zooms timed to your caption lines, plus glitches, shakes and flashes on the loudest moments
-   - whooshes, pops, booms and a ding, placed to match those moments
-   - emoji stickers on words that call for one (money 💰, mistake 🛑, hair 💇‍♀️ …)
-   - a color grade, a caption style and a progress bar
+1. **Add your video**: tap *Choose video* or drop a clip onto the phone preview.
+2. **Magic → Make my reel**. Pick a vibe (Cozy, Upbeat, Minimal or Cinematic), check the hook and ending text, and tap the button. It:
+   - captions every word with Whisper in your browser (the first run downloads an 80 to 150 MB speech model, then it is cached)
+   - cuts the long pauses and the ums
+   - styles the captions, adds the hook card, ending card, gentle zooms, a few sound hits, emoji stickers, a color grade and a progress bar
 
-   Run it again and you get a different take. Anything it adds shows a small dot on the timeline, and the next run replaces only those dotted items.
-4. Change anything you like, then **Export video**. The export renders in real time with sound, so keep the tab visible until it finishes.
+   Tap it again for a different take. Anything it adds shows a small dot on the timeline, and the next run replaces only those.
+3. Change anything you like, then **Export**. The export plays your reel once in real time with sound, so keep the tab visible until it finishes. On a phone you get a **Share** button that hands the file straight to the share sheet.
+
+## The studio
+
+| Tool | What it does |
+| --- | --- |
+| Magic | The one-tap edit described above. |
+| Tighten | Cuts pauses longer than a length you pick (Relaxed, Natural, Snappy). With captions it also cuts gaps between words, which catches most ums that the speech model leaves out of the text. Nothing is deleted: every cut is listed, shows as a striped block on the timeline, and can be dragged or put back. Playback, captions, music and export all skip the cuts. |
+| Captions | Auto-caption, paste a script, or import .srt. Twelve styles shown as live previews on your own frame, including the softer Cozy serif, Soft pill, Minimal, Editorial, Butter box and Handwritten looks. |
+| Text, Look, Sound, Effects | Templates, stickers, logo, progress bar, 12 color grades (previewed on your frame), music, sound effects and video effects. |
+| Safe zones | Shows where the app's buttons and caption sit over a 9:16 reel so nothing important hides behind them. |
+
+Your draft is saved in the browser as you work. Open the same video again and it picks up where you left off.
 
 ## What's in the box
 
