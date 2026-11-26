@@ -206,7 +206,20 @@ function toast(msg, ms = 2600) {
   clearTimeout(toast.t);
   toast.t = setTimeout(() => el.classList.remove('show'), ms);
 }
-function download(blob, name) {
+// Inside a claude.ai artifact the page cannot download directly, so use the
+// platform's downloads capability there; elsewhere fall back to a plain link.
+let claudeDownloads = null;
+if (window.claude && window.claude.use) window.claude.use('downloads').then(d => { claudeDownloads = d; }).catch(() => {});
+async function download(blob, name) {
+  if (claudeDownloads) {
+    try {
+      await claudeDownloads.save({ filename: name, data: blob });
+    } catch (err) {
+      if (err && err.code === 'rejected_extension' && !/\.txt$/.test(name)) return download(blob, name + '.txt');
+      if (err && err.code !== 'declined') toast('Could not save the file here: ' + (err.message || err.code), 5000);
+    }
+    return;
+  }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = name;
@@ -1616,6 +1629,11 @@ function bindUI() {
   $('#btn-export').addEventListener('click', () => exportVideo().catch(err => { console.error(err); exporting = null; $('#dlg-export').close(); toast('Export failed: ' + err.message, 5000); }));
   $('#exp-cancel').addEventListener('click', () => { if (exporting) { exporting.cancelled = true; video.pause(); exporting.finish && exporting.finish(); } });
   $('#exp-close').addEventListener('click', () => $('#dlg-export').close());
+  $('#exp-download').addEventListener('click', e => {
+    if (!claudeDownloads || !lastExport) return;
+    e.preventDefault();
+    download(lastExport, lastExport.name);
+  });
   $('#exp-share').addEventListener('click', () => { if (lastExport) navigator.share({ files: [lastExport], title: P.name }).catch(() => {}); });
   $('#dlg-export').addEventListener('cancel', e => { if (exporting) e.preventDefault(); });
 
