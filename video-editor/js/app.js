@@ -1173,15 +1173,50 @@ function tick() {
 }
 
 // ---------- loading media ----------
+// Point the preview video at a source and wait until the browser knows its length.
+// Phones (iOS especially) may not load a video until it is nudged with play().
+function openSource(src) {
+  return new Promise((res, rej) => {
+    let done = false, nudge = 0, give = 0;
+    const finish = (ok, err) => { if (done) return; done = true; clearTimeout(nudge); clearTimeout(give); ok ? res() : rej(err); };
+    video.onloadedmetadata = () => finish(true);
+    video.onerror = () => finish(false, new Error('code ' + (video.error ? video.error.code : '?')));
+    video.muted = true;
+    video.src = src;
+    video.load();
+    nudge = setTimeout(() => { if (video.readyState < 1) video.play().then(() => video.pause()).catch(() => {}); }, 1200);
+    give = setTimeout(() => finish(false, new Error('timed out')), 20000);
+  });
+}
+
 async function loadVideo(file) {
-  if (!file || !file.type.startsWith('video/') && !/\.(mp4|mov|webm|m4v|mkv)$/i.test(file.name)) return toast('That file is not a video');
+  if (!file) return;
+  if (file.type && !file.type.startsWith('video/') && !/\.(mp4|mov|webm|m4v|mkv|3gp)$/i.test(file.name)) return toast('That file is not a video');
+  toast('Opening your video…', 20000);
   videoFile = file;
   pcm = env = null;
   strip = null;
-  if (video.src) URL.revokeObjectURL(video.src);
-  video.src = URL.createObjectURL(file);
-  await new Promise((res, rej) => { video.onloadedmetadata = res; video.onerror = () => rej(new Error('This browser cannot play that video format. Try an MP4.')); })
-    .catch(err => { toast(err.message, 5000); throw err; });
+  if (video.src && video.src.startsWith('blob:')) URL.revokeObjectURL(video.src);
+  try {
+    await openSource(URL.createObjectURL(file));
+  } catch (err) {
+    // Some embedded pages refuse blob: media. Try the file inlined as a data URL instead.
+    console.warn('blob video failed', err);
+    try {
+      if (file.size > 400e6) throw err;
+      const dataUrl = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); });
+      await openSource(dataUrl);
+    } catch (err2) {
+      console.error('video failed', err2);
+      toast(`This browser couldn't open that video (${err2.message}). Try an MP4, or open the studio in Chrome or Safari.`, 8000);
+      throw err2;
+    }
+  }
+  video.muted = false;
+  if (!isFinite(video.duration)) {
+    await new Promise(r => { video.ondurationchange = () => { if (isFinite(video.duration)) r(); }; video.currentTime = 1e7; setTimeout(r, 4000); });
+    video.ondurationchange = null;
+  }
   duration = video.duration;
   document.body.classList.remove('empty');
   $('#dropzone').hidden = true;
@@ -1512,13 +1547,14 @@ function refreshAll() {
 
 // ---------- wiring ----------
 function bindUI() {
+  $$('label[for="file-video"]').forEach(l => l.addEventListener('click', e => { e.preventDefault(); $('#file-video').click(); }));
   $('#file-video').addEventListener('change', e => { closeMenu(); loadVideo(e.target.files[0]).catch(() => {}); e.target.value = ''; });
   const stageBox = $('#stage-box');
   ['dragenter', 'dragover'].forEach(ev => stageBox.addEventListener(ev, e => { e.preventDefault(); $('#dropzone').classList.add('over'); }));
   ['dragleave', 'drop'].forEach(ev => stageBox.addEventListener(ev, () => $('#dropzone').classList.remove('over')));
   stageBox.addEventListener('drop', e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) loadVideo(f).catch(() => {}); });
   window.addEventListener('dragover', e => e.preventDefault());
-  window.addEventListener('drop', e => { e.preventDefault(); const f = e.dataTransfer && e.dataTransfer.files[0]; if (f && f.type.startsWith('video/')) loadVideo(f).catch(() => {}); });
+  window.addEventListener('drop', e => { e.preventDefault(); const f = e.dataTransfer && e.dataTransfer.files[0]; if (f) loadVideo(f).catch(() => {}); });
 
   $('#proj-name').addEventListener('input', e => { P.name = e.target.value; scheduleSave(); });
   $('#aspect').addEventListener('change', e => { snap(); P.aspect = e.target.value; applyAspect(); });

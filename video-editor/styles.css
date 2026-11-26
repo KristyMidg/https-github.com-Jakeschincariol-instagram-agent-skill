@@ -550,3 +550,7 @@ kbd { background: var(--cream); border: 1px solid var(--line-2); border-bottom-w
   body.inspecting .panels { display: block; }
   body.inspecting .timeline { display: none !important; }
 }
+
+/* Kept out of view without display:none, which can stop phones from picking files or loading the video. */
+.file-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; }
+video.offscreen { position: fixed; left: 0; top: 0; width: 2px; height: 2px; opacity: 0; pointer-events: none; }

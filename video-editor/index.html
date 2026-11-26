@@ -67,8 +67,8 @@
     </div>
     <button class="btn primary" id="btn-export"><svg><use href="#i-download"/></svg><span>Export</span></button>
   </div>
-  <input type="file" id="file-video" accept="video/*" hidden>
-  <input type="file" id="file-project" accept="application/json,.json" hidden>
+  <input type="file" id="file-video" class="file-input" accept="video/*,.mov,.mp4,.m4v,.webm">
+  <input type="file" id="file-project" class="file-input" accept="application/json,.json">
 </header>
 
 <main class="studio">
@@ -193,7 +193,7 @@
         <div class="row wrap">
           <button class="btn small" id="btn-cap-add">Add a line here</button>
           <label class="btn small" for="file-subs">Import .srt</label>
-          <input type="file" id="file-subs" accept=".srt,.vtt,text/vtt" hidden>
+          <input type="file" id="file-subs" class="file-input" accept=".srt,.vtt,text/vtt">
           <button class="btn small danger" id="btn-cap-clear">Clear all</button>
         </div>
       </div>
@@ -211,7 +211,7 @@
       <div class="group">
         <h3>Your logo or a photo</h3>
         <label class="btn" for="file-image"><svg><use href="#i-upload"/></svg>Add image</label>
-        <input type="file" id="file-image" accept="image/*" hidden>
+        <input type="file" id="file-image" class="file-input" accept="image/*">
       </div>
       <div class="group"><h3>Progress bar</h3><div class="fields" id="progress-fields"></div></div>
     </section>
@@ -246,7 +246,7 @@
           <svg><use href="#i-music"/></svg>
           <span id="music-name">No music yet</span>
           <label class="btn small" for="file-music">Choose</label>
-          <input type="file" id="file-music" accept="audio/*" hidden>
+          <input type="file" id="file-music" class="file-input" accept="audio/*">
         </div>
         <div class="fields" id="audio-fields"></div>
       </div>
@@ -255,7 +255,7 @@
         <p class="hint">Tap a name to hear it. Plus drops it at the playhead.</p>
         <ul class="sfx-list" id="sfx-list"></ul>
         <label class="btn small" for="file-sfx">Upload your own sound</label>
-        <input type="file" id="file-sfx" accept="audio/*" hidden>
+        <input type="file" id="file-sfx" class="file-input" accept="audio/*">
       </div>
     </section>
 
@@ -368,7 +368,7 @@
 </dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<video id="video" playsinline preload="auto" hidden></video>
+<video id="video" class="offscreen" playsinline webkit-playsinline preload="auto"></video>
 <audio id="music" preload="auto" hidden></audio>
 
 <script src="js/sfx.js"></script>
