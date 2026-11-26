@@ -2,57 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reelsmith</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F1EA">
+<title>Reelsmith Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Montserrat:wght@900&family=Anton&family=Bebas+Neue&family=Bangers&family=Luckiest+Guy&family=Archivo+Black&family=Poppins:wght@800&family=Permanent+Marker&family=Playfair+Display:wght@900&family=Righteous&family=Rubik+Mono+One&family=Caveat:wght@700&family=Pacifico&family=Oswald:wght@700&family=Courier+Prime:wght@700&family=DM+Sans:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Nunito:wght@800&family=Instrument+Serif&family=Montserrat:wght@900&family=Anton&family=Bebas+Neue&family=Bangers&family=Luckiest+Guy&family=Archivo+Black&family=Poppins:wght@800&family=Permanent+Marker&family=Playfair+Display:wght@900&family=Righteous&family=Rubik+Mono+One&family=Caveat:wght@700&family=Pacifico&family=Oswald:wght@700&family=Courier+Prime:wght@700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<header class="bar">
-  <div class="brand">
-    <span class="tally" aria-hidden="true"></span>
-    <strong>Reelsmith</strong>
-    <span class="brand-sub">raw footage in, finished reel out</span>
+<body class="empty" data-tab="magic">
+
+<svg class="sprite" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-logo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7B79B"/><stop offset=".55" stop-color="#EE9D9A"/><stop offset="1" stop-color="#C9715A"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-magic" viewBox="0 0 24 24"><path d="M11 3.5l1.7 4.4 4.4 1.7-4.4 1.7L11 15.7l-1.7-4.4-4.4-1.7 4.4-1.7z"/><path d="M18.5 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/><path d="M5 17.5l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5z"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.4L20 18M8.3 15.6L20 6"/></symbol>
+  <symbol id="i-cc" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3.5"/><path d="M10.6 10.2a2.2 2.2 0 1 0 0 3.6M17 10.2a2.2 2.2 0 1 0 0 3.6"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V5h16v2M12 5v14M9 19h6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+  <symbol id="i-lines" viewBox="0 0 24 24"><path d="M4 6h9M4 12h16M4 18h6"/><circle cx="16" cy="6" r="1.4"/><circle cx="13.5" cy="18" r="1.4"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.6" height="14" rx="1" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M6 5v14"/><path d="M18.5 5.5v13L9 12z" fill="currentColor"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V5M7 10l5-5 5 5M5 20h14"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-frame" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M15.5 9v.01M15.5 12v.01M15.5 15v.01M8.5 17h4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-6.5 18-4-7.5L3 9.5z"/></symbol>
+</defs>
+</svg>
+
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Reelsmith Studio">
+    <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="url(#g-logo)"/><path d="M12.5 10v12l9.5-6z" fill="#FFFCF8"/><path d="M24 5.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#FFFCF8"/></svg>
+    <span class="brand-name">Reelsmith <em>Studio</em></span>
+  </a>
+  <label class="proj-name"><span class="sr-only">Reel name</span><input id="proj-name" value="Untitled reel" maxlength="60" spellcheck="false"></label>
+  <ol class="stepper" id="stepper" aria-label="Progress">
+    <li data-step="1"><b>1</b>Add video</li>
+    <li data-step="2"><b>2</b>Make it yours</li>
+    <li data-step="3"><b>3</b>Share</li>
+  </ol>
+  <div class="top-actions">
+    <button class="icon-btn" id="btn-undo" title="Undo (Ctrl+Z)" aria-label="Undo"><svg><use href="#i-undo"/></svg></button>
+    <div class="menu">
+      <button class="icon-btn" id="btn-menu" aria-haspopup="true" aria-expanded="false" aria-label="More"><svg><use href="#i-dots"/></svg></button>
+      <div class="menu-pop" id="menu-pop" hidden>
+        <label class="menu-item" for="file-video">Open a different video</label>
+        <button class="menu-item" id="btn-save">Save project file</button>
+        <label class="menu-item" for="file-project">Open project file</label>
+        <button class="menu-item" id="btn-srt">Download captions (.srt)</button>
+        <button class="menu-item" id="btn-shortcuts">Keyboard shortcuts</button>
+      </div>
+    </div>
+    <button class="btn primary" id="btn-export"><svg><use href="#i-download"/></svg><span>Export</span></button>
   </div>
-  <div class="bar-actions">
-    <label class="btn" for="file-video">Open video</label>
-    <input type="file" id="file-video" accept="video/*" hidden>
-    <label class="select-wrap" title="Output format">
-      <span class="sr-only">Format</span>
-      <select id="aspect">
-        <option value="9:16">9:16 Reel / TikTok / Short</option>
-        <option value="4:5">4:5 Feed post</option>
-        <option value="1:1">1:1 Square</option>
-        <option value="16:9">16:9 YouTube</option>
-      </select>
-    </label>
-    <button class="btn" id="btn-undo" title="Undo (Ctrl+Z)">Undo</button>
-    <button class="btn" id="btn-save" title="Download the edit as a project file">Save project</button>
-    <label class="btn" for="file-project">Open project</label>
-    <input type="file" id="file-project" accept="application/json,.json" hidden>
-    <button class="btn magic" id="btn-auto">Make it spectacular</button>
-    <button class="btn primary" id="btn-export">Export video</button>
-  </div>
+  <input type="file" id="file-video" class="file-input" accept="video/*,.mov,.mp4,.m4v,.webm">
+  <input type="file" id="file-project" class="file-input" accept="application/json,.json">
 </header>
 
-<main class="workspace">
-  <aside class="tools" aria-label="Tools">
-    <nav class="tabs" role="tablist">
-      <button role="tab" class="tab active" data-tab="captions" id="tab-captions">Captions</button>
-      <button role="tab" class="tab" data-tab="graphics" id="tab-graphics">Text &amp; graphics</button>
-      <button role="tab" class="tab" data-tab="effects" id="tab-effects">Effects</button>
-      <button role="tab" class="tab" data-tab="look" id="tab-look">Look</button>
-      <button role="tab" class="tab" data-tab="sound" id="tab-sound">Sound</button>
-    </nav>
+<main class="studio">
+  <nav class="rail" role="tablist" aria-label="Tools">
+    <button role="tab" class="rail-btn" data-tab="magic"><svg><use href="#i-magic"/></svg><span>Magic</span></button>
+    <button role="tab" class="rail-btn" data-tab="tighten"><svg><use href="#i-scissors"/></svg><span>Tighten</span></button>
+    <button role="tab" class="rail-btn" data-tab="captions"><svg><use href="#i-cc"/></svg><span>Captions</span></button>
+    <button role="tab" class="rail-btn" data-tab="graphics"><svg><use href="#i-text"/></svg><span>Text</span></button>
+    <button role="tab" class="rail-btn" data-tab="look"><svg><use href="#i-sun"/></svg><span>Look</span></button>
+    <button role="tab" class="rail-btn" data-tab="sound"><svg><use href="#i-music"/></svg><span>Sound</span></button>
+    <button role="tab" class="rail-btn" data-tab="effects"><svg><use href="#i-bolt"/></svg><span>Effects</span></button>
+    <button role="tab" class="rail-btn mobile-only" data-tab="timeline"><svg><use href="#i-lines"/></svg><span>Timeline</span></button>
+  </nav>
 
-    <section class="panel" data-panel="captions">
+  <section class="panels" id="panels">
+    <!-- MAGIC -->
+    <section class="panel" data-panel="magic">
+      <header class="panel-head">
+        <p class="eyebrow">One tap</p>
+        <h2>Finish my reel</h2>
+        <p class="lede">We cut the awkward pauses, caption every word and add a little polish. You can change anything after.</p>
+      </header>
       <div class="group">
-        <h3>Get captions</h3>
+        <h3>Pick a vibe</h3>
+        <div class="vibes" id="vibes"></div>
+      </div>
+      <div class="group">
+        <label class="field-lg"><span>Hook <small>shows for the first 3 seconds</small></span><input type="text" id="auto-hook" maxlength="60" placeholder="The one thing I wish I knew sooner"></label>
+        <label class="field-lg"><span>Ending <small>shows in the last seconds</small></span><input type="text" id="auto-cta" maxlength="60" value="Follow for more"></label>
+      </div>
+      <details class="group fold">
+        <summary>What it does <span class="muted" id="magic-count"></span></summary>
+        <div class="switches">
+          <label class="switch"><input type="checkbox" id="auto-cut" checked><i></i>Cut pauses &amp; ums</label>
+          <label class="switch"><input type="checkbox" id="auto-capstyle" checked><i></i>Captions in the vibe's style</label>
+          <label class="switch"><input type="checkbox" id="auto-look" checked><i></i>Color grade</label>
+          <label class="switch"><input type="checkbox" id="auto-effects" checked><i></i>Gentle zooms</label>
+          <label class="switch"><input type="checkbox" id="auto-sfx" checked><i></i>Sound effects</label>
+          <label class="switch"><input type="checkbox" id="auto-emoji" checked><i></i>Emoji stickers</label>
+          <label class="switch"><input type="checkbox" id="auto-progress" checked><i></i>Progress bar</label>
+        </div>
+      </details>
+      <div class="magic-go">
+        <button class="btn magic xl" id="btn-magic"><svg><use href="#i-magic"/></svg>Make my reel</button>
+        <p class="hint center">Tap again for a different take.</p>
+      </div>
+      <ol class="run" id="magic-run" hidden></ol>
+    </section>
+
+    <!-- TIGHTEN -->
+    <section class="panel" data-panel="tighten" hidden>
+      <header class="panel-head">
+        <p class="eyebrow">Cut the dead air</p>
+        <h2>Tighten it up</h2>
+        <p class="lede">Snip the long pauses and the "umm"s so you sound sure of yourself. Nothing is deleted, so you can put any cut back.</p>
+      </header>
+      <div class="stat-card" id="cut-stats">
+        <div><small>Before</small><b id="st-before">0:00</b></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div><small>After</small><b id="st-after">0:00</b></div>
+        <div class="saved"><small>Saved</small><b id="st-saved">0s</b></div>
+      </div>
+      <div class="group">
+        <label class="field-lg"><span>Cut pauses longer than <output id="cut-min-out">0.5s</output></span>
+          <input type="range" id="cut-min" min="0.25" max="1.5" step="0.05" value="0.5"></label>
+        <div class="seg" role="radiogroup" aria-label="How snappy">
+          <button class="seg-btn" data-snap="0.9">Relaxed</button>
+          <button class="seg-btn on" data-snap="0.5">Natural</button>
+          <button class="seg-btn" data-snap="0.3">Snappy</button>
+        </div>
+        <label class="switch"><input type="checkbox" id="cut-words" checked><i></i>Also cut ums the captions skipped</label>
+        <p class="hint">Uses your word timings, so caption your video first for the best cuts.</p>
+      </div>
+      <div class="row">
+        <button class="btn primary grow" id="btn-cut"><svg><use href="#i-scissors"/></svg>Cut the pauses</button>
+        <button class="btn" id="btn-cut-clear">Put all back</button>
+      </div>
+      <p class="hint" id="cut-status"></p>
+      <div class="group">
+        <h3>Cuts <span class="count" id="cut-count"></span></h3>
+        <ol class="cut-list" id="cut-list"></ol>
+      </div>
+    </section>
+
+    <!-- CAPTIONS -->
+    <section class="panel" data-panel="captions" hidden>
+      <header class="panel-head">
+        <p class="eyebrow">Word by word</p>
+        <h2>Captions</h2>
+      </header>
+      <div class="group">
         <div class="row">
           <select id="cap-lang" aria-label="Spoken language">
-            <option value="auto">Detect language</option>
+            <option value="auto">Any language</option>
             <option value="english">English</option>
             <option value="spanish">Spanish</option>
             <option value="french">French</option>
@@ -60,187 +170,205 @@
             <option value="portuguese">Portuguese</option>
             <option value="italian">Italian</option>
           </select>
-          <button class="btn primary" id="btn-transcribe">Auto-caption</button>
+          <button class="btn primary grow" id="btn-transcribe"><svg><use href="#i-cc"/></svg>Auto-caption</button>
         </div>
-        <p class="hint" id="cap-status">Whisper runs inside your browser, so your footage never leaves your computer.</p>
-        <details>
+        <p class="hint" id="cap-status">Runs on your device, so your video stays private.</p>
+        <details class="fold">
           <summary>Paste your script instead</summary>
-          <textarea id="cap-paste" rows="4" placeholder="Paste what you said. Reelsmith spreads the words over the parts of the clip where you are talking."></textarea>
+          <textarea id="cap-paste" rows="4" placeholder="Paste what you said. We'll line the words up with your voice."></textarea>
           <button class="btn" id="btn-fit">Time it to my voice</button>
         </details>
-        <div class="row wrap">
-          <label class="btn small" for="file-subs">Import .srt / .vtt</label>
-          <input type="file" id="file-subs" accept=".srt,.vtt,text/vtt" hidden>
-          <button class="btn small" id="btn-srt">Download .srt</button>
-          <button class="btn small" id="btn-cap-add">Add line at playhead</button>
-          <button class="btn small danger" id="btn-cap-clear">Clear</button>
-        </div>
       </div>
       <div class="group">
-        <h3>Caption style</h3>
-        <div class="chips" id="cap-presets"></div>
-        <div class="fields" id="cap-style"></div>
+        <h3>Style</h3>
+        <div class="style-grid" id="cap-presets"></div>
+        <details class="fold">
+          <summary>Fine-tune the style</summary>
+          <div class="fields" id="cap-style"></div>
+        </details>
       </div>
       <div class="group">
         <h3>Lines <span class="count" id="cap-count"></span></h3>
         <ol class="cap-list" id="cap-list"></ol>
+        <div class="row wrap">
+          <button class="btn small" id="btn-cap-add">Add a line here</button>
+          <label class="btn small" for="file-subs">Import .srt</label>
+          <input type="file" id="file-subs" class="file-input" accept=".srt,.vtt,text/vtt">
+          <button class="btn small danger" id="btn-cap-clear">Clear all</button>
+        </div>
       </div>
     </section>
 
+    <!-- TEXT -->
     <section class="panel" data-panel="graphics" hidden>
+      <header class="panel-head">
+        <p class="eyebrow">Tap to add</p>
+        <h2>Text &amp; stickers</h2>
+        <p class="lede">Lands where the playhead is. Drag it around on the video.</p>
+      </header>
+      <div class="group"><h3>Text</h3><div class="tiles" id="tpl-grid"></div></div>
+      <div class="group"><h3>Stickers</h3><div class="emoji-grid" id="emoji-grid"></div></div>
       <div class="group">
-        <h3>Text templates</h3>
-        <p class="hint">Added at the playhead. Drag them around on the video.</p>
-        <div class="tiles" id="tpl-grid"></div>
+        <h3>Your logo or a photo</h3>
+        <label class="btn" for="file-image"><svg><use href="#i-upload"/></svg>Add image</label>
+        <input type="file" id="file-image" class="file-input" accept="image/*">
       </div>
-      <div class="group">
-        <h3>Stickers</h3>
-        <div class="emoji-grid" id="emoji-grid"></div>
-      </div>
-      <div class="group">
-        <h3>Logo or image</h3>
-        <label class="btn" for="file-image">Add image</label>
-        <input type="file" id="file-image" accept="image/*" hidden>
-      </div>
-      <div class="group">
-        <h3>Progress bar</h3>
-        <div class="fields" id="progress-fields"></div>
-      </div>
+      <div class="group"><h3>Progress bar</h3><div class="fields" id="progress-fields"></div></div>
     </section>
 
-    <section class="panel" data-panel="effects" hidden>
-      <div class="group">
-        <h3>Video effects</h3>
-        <p class="hint">Each one lands at the playhead. Stretch it on the timeline to change how long it lasts.</p>
-        <div class="tiles" id="fx-grid"></div>
-      </div>
-    </section>
-
+    <!-- LOOK -->
     <section class="panel" data-panel="look" hidden>
-      <div class="group">
-        <h3>Color grade</h3>
-        <div class="chips" id="look-presets"></div>
-      </div>
-      <div class="group">
-        <h3>Adjust</h3>
+      <header class="panel-head">
+        <p class="eyebrow">Color</p>
+        <h2>Look</h2>
+      </header>
+      <div class="group"><div class="look-grid" id="look-presets"></div></div>
+      <details class="group fold">
+        <summary>Adjust</summary>
         <div class="fields" id="look-fields"></div>
-      </div>
+      </details>
       <div class="group">
         <h3>Framing</h3>
-        <p class="hint">Shot sideways? Fill the frame and slide the crop to keep your face in shot.</p>
+        <p class="hint">Filmed sideways? Fill the frame and slide the crop to keep your face in shot.</p>
         <div class="fields" id="frame-fields"></div>
       </div>
     </section>
 
+    <!-- SOUND -->
     <section class="panel" data-panel="sound" hidden>
+      <header class="panel-head">
+        <p class="eyebrow">Audio</p>
+        <h2>Sound</h2>
+      </header>
+      <div class="group">
+        <h3>Music</h3>
+        <div class="music-card">
+          <svg><use href="#i-music"/></svg>
+          <span id="music-name">No music yet</span>
+          <label class="btn small" for="file-music">Choose</label>
+          <input type="file" id="file-music" class="file-input" accept="audio/*">
+        </div>
+        <div class="fields" id="audio-fields"></div>
+      </div>
       <div class="group">
         <h3>Sound effects</h3>
         <p class="hint">Tap a name to hear it. Plus drops it at the playhead.</p>
         <ul class="sfx-list" id="sfx-list"></ul>
         <label class="btn small" for="file-sfx">Upload your own sound</label>
-        <input type="file" id="file-sfx" accept="audio/*" hidden>
-      </div>
-      <div class="group">
-        <h3>Music</h3>
-        <div class="row">
-          <label class="btn small" for="file-music">Add music track</label>
-          <input type="file" id="file-music" accept="audio/*" hidden>
-          <span class="hint" id="music-name">No music yet</span>
-        </div>
-        <div class="fields" id="audio-fields"></div>
+        <input type="file" id="file-sfx" class="file-input" accept="audio/*">
       </div>
     </section>
-  </aside>
 
-  <section class="stage-wrap" aria-label="Preview">
-    <div class="stage" id="stage-box">
+    <!-- EFFECTS -->
+    <section class="panel" data-panel="effects" hidden>
+      <header class="panel-head">
+        <p class="eyebrow">Motion</p>
+        <h2>Effects</h2>
+        <p class="lede">Each one lands at the playhead. Stretch it on the timeline to change how long it lasts.</p>
+      </header>
+      <div class="tiles" id="fx-grid"></div>
+    </section>
+
+    <aside class="inspector" id="inspector" hidden aria-label="Selected item"></aside>
+  </section>
+
+  <section class="stage-area" aria-label="Preview">
+    <div class="stage-tools">
+      <label class="chip-select" title="Size">
+        <span class="sr-only">Size</span>
+        <select id="aspect">
+          <option value="9:16">9:16 Reel</option>
+          <option value="4:5">4:5 Post</option>
+          <option value="1:1">1:1 Square</option>
+          <option value="16:9">16:9 Wide</option>
+        </select>
+      </label>
+      <button class="chip-toggle" id="btn-safe" aria-pressed="false" title="Show where the app's buttons cover your video"><svg><use href="#i-frame"/></svg><span>Safe zones</span></button>
+    </div>
+    <div class="phone" id="stage-box">
       <canvas id="stage" width="1080" height="1920"></canvas>
+      <div class="safe" id="safe" hidden aria-hidden="true">
+        <div class="safe-top"></div>
+        <div class="safe-side"><svg><use href="#i-heart"/></svg><svg><use href="#i-chat"/></svg><svg><use href="#i-send"/></svg><span class="safe-dots"></span></div>
+        <div class="safe-bottom"><span class="safe-avatar"></span><span class="safe-line w60"></span><span class="safe-line w40"></span></div>
+      </div>
+      <div class="cut-badge" id="cut-badge" hidden><svg><use href="#i-scissors"/></svg>This bit is cut</div>
       <div class="dropzone" id="dropzone">
         <div class="drop-card">
-          <p class="drop-title">Drop your raw footage here</p>
-          <p class="hint">MP4, MOV or WebM from your phone or camera. Everything stays on this computer.</p>
-          <label class="btn primary" for="file-video">Choose a video</label>
-          <ol class="steps">
-            <li><b>Auto-caption</b> transcribes what you say, word by word.</li>
-            <li><b>Make it spectacular</b> adds a hook title, zooms, sound hits, stickers and a grade.</li>
-            <li><b>Tweak</b> anything on the timeline, then export a finished MP4.</li>
+          <div class="drop-icon"><svg><use href="#i-upload"/></svg></div>
+          <p class="drop-title">Add your talking video</p>
+          <p class="drop-sub">Film it on your phone, then drop it here. It never leaves your device.</p>
+          <label class="btn primary" for="file-video">Choose video</label>
+          <ol class="drop-steps">
+            <li><b>1</b>Add your clip</li>
+            <li><b>2</b>Tap <em>Make my reel</em></li>
+            <li><b>3</b>Export and post</li>
           </ol>
         </div>
       </div>
     </div>
     <div class="transport">
-      <button class="btn icon" id="btn-back" title="Back to start" aria-label="Back to start">&#9198;</button>
-      <button class="btn icon play" id="btn-play" title="Play / pause (Space)" aria-label="Play">&#9654;</button>
-      <span class="clock" id="clock">00:00.00 / 00:00.00</span>
+      <button class="icon-btn" id="btn-back" title="Back to start" aria-label="Back to start"><svg><use href="#i-back"/></svg></button>
+      <button class="play" id="btn-play" title="Play / pause (Space)" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+      <div class="clock-wrap">
+        <span class="clock" id="clock">0:00 / 0:00</span>
+        <span class="len-pill" id="len-pill" hidden></span>
+      </div>
     </div>
   </section>
 
-  <aside class="inspector" id="inspector" aria-label="Inspector"></aside>
+  <section class="timeline" id="timeline" aria-label="Timeline">
+    <div class="tl-head">
+      <span class="tl-title">Timeline</span>
+      <span class="tl-legend"><i class="lg-cut"></i>Cut <i class="lg-auto"></i>Added by Magic</span>
+      <label class="tl-zoom"><span>Zoom</span><input type="range" id="tl-zoom" min="8" max="240" value="60"></label>
+      <button class="icon-btn small desktop-only" id="btn-tl-toggle" aria-label="Collapse timeline" title="Collapse timeline"><svg><use href="#i-chev"/></svg></button>
+    </div>
+    <div class="filmstrip" id="filmstrip"></div>
+    <div class="tl-body" id="tl-body">
+      <div class="tl-labels" id="tl-labels"></div>
+      <div class="tl-scroll" id="tl-scroll">
+        <div class="tl-inner" id="tl-inner"></div>
+      </div>
+    </div>
+  </section>
 </main>
-
-<section class="timeline" aria-label="Timeline">
-  <div class="tl-head">
-    <span class="tl-title">Timeline</span>
-    <label class="tl-zoom">Zoom <input type="range" id="tl-zoom" min="8" max="240" value="60"></label>
-  </div>
-  <div class="tl-body" id="tl-body">
-    <div class="tl-labels" id="tl-labels"></div>
-    <div class="tl-scroll" id="tl-scroll">
-      <div class="tl-inner" id="tl-inner"></div>
-    </div>
-  </div>
-</section>
-
-<dialog id="dlg-auto">
-  <form method="dialog" id="form-auto">
-    <h2>Make it spectacular</h2>
-    <p class="hint">Builds a full edit from your clip. Run it again for a different take, and anything it adds can be changed on the timeline.</p>
-    <fieldset class="vibes">
-      <legend>Vibe</legend>
-      <label><input type="radio" name="vibe" value="energetic" checked><span><b>Energetic</b>Punch-ins, whooshes, bold captions</span></label>
-      <label><input type="radio" name="vibe" value="cinematic"><span><b>Cinematic</b>Slow pushes, film grade, fades</span></label>
-      <label><input type="radio" name="vibe" value="clean"><span><b>Clean</b>Bright and tidy, gentle motion</span></label>
-    </fieldset>
-    <label class="field"><span>Hook title (first 3 seconds)</span><input type="text" id="auto-hook" maxlength="60"></label>
-    <label class="field"><span>Call to action (last seconds)</span><input type="text" id="auto-cta" maxlength="60" value="Follow for more"></label>
-    <fieldset class="checks">
-      <legend>Include</legend>
-      <label><input type="checkbox" id="auto-look" checked> Color grade</label>
-      <label><input type="checkbox" id="auto-capstyle" checked> Caption style</label>
-      <label><input type="checkbox" id="auto-effects" checked> Zooms &amp; effects</label>
-      <label><input type="checkbox" id="auto-sfx" checked> Sound effects</label>
-      <label><input type="checkbox" id="auto-emoji" checked> Emoji stickers</label>
-      <label><input type="checkbox" id="auto-progress" checked> Progress bar</label>
-    </fieldset>
-    <p class="hint" id="auto-note"></p>
-    <div class="row end">
-      <button class="btn" value="cancel">Cancel</button>
-      <button class="btn magic" value="apply" id="auto-apply">Build the edit</button>
-    </div>
-  </form>
-</dialog>
 
 <dialog id="dlg-export">
   <div id="exp-progress">
-    <h2>Exporting</h2>
-    <p class="hint">Rendering in real time with sound. Keep this tab open and visible until it finishes.</p>
+    <div class="exp-orb" aria-hidden="true"></div>
+    <h2>Putting your reel together</h2>
+    <p class="hint">This plays your reel once with sound, so keep this tab open and in front until it's done.</p>
     <div class="meter"><div class="meter-fill" id="exp-bar"></div></div>
     <p class="clock" id="exp-clock"></p>
     <div class="row end"><button class="btn danger" id="exp-cancel">Cancel</button></div>
   </div>
   <div id="exp-done" hidden>
-    <h2>Your reel is ready</h2>
-    <video id="exp-video" controls playsinline></video>
+    <h2>Your reel is ready <span aria-hidden="true">🎉</span></h2>
+    <div class="exp-video"><video id="exp-video" controls playsinline></video></div>
     <p class="hint" id="exp-info"></p>
-    <div class="row end">
-      <button class="btn" id="exp-close">Back to editing</button>
-      <a class="btn primary" id="exp-download" download="reel.mp4">Download</a>
+    <div class="row stack-sm">
+      <button class="btn" id="exp-close">Keep editing</button>
+      <button class="btn" id="exp-share" hidden><svg><use href="#i-share"/></svg>Share</button>
+      <a class="btn primary" id="exp-download" download="reel.mp4"><svg><use href="#i-download"/></svg>Download</a>
     </div>
   </div>
 </dialog>
 
+<dialog id="dlg-keys">
+  <h2>Shortcuts</h2>
+  <ul class="keys">
+    <li><kbd>Space</kbd></li><li>Play / pause</li>
+    <li><kbd>← →</kbd></li><li>Step a frame (Shift: 1 second)</li>
+    <li><kbd>Del</kbd></li><li>Delete selected</li>
+    <li><kbd>Ctrl D</kbd></li><li>Duplicate selected</li>
+    <li><kbd>Ctrl Z</kbd></li><li>Undo</li>
+  </ul>
+  <form method="dialog" class="row end"><button class="btn">Close</button></form>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<video id="video" playsinline preload="auto" hidden></video>
+<video id="video" class="offscreen" playsinline webkit-playsinline preload="auto"></video>
 <audio id="music" preload="auto" hidden></audio>
 
 <script src="js/sfx.js"></script>

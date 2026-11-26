@@ -8,7 +8,8 @@ const FONTS = [
   { name: 'Poppins', w: 800 }, { name: 'Permanent Marker', w: 400 }, { name: 'Playfair Display', w: 900 },
   { name: 'Righteous', w: 400 }, { name: 'Rubik Mono One', w: 400 }, { name: 'Caveat', w: 700 },
   { name: 'Pacifico', w: 400 }, { name: 'Oswald', w: 700 }, { name: 'Courier Prime', w: 700 },
-  { name: 'DM Sans', w: 700 },
+  { name: 'DM Sans', w: 700 }, { name: 'Fraunces', w: 700 }, { name: 'Nunito', w: 800 },
+  { name: 'Instrument Serif', w: 400 },
 ];
 const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
 
@@ -367,7 +368,8 @@ const Renderer = (() => {
     ctx.font = fontStr(st.font, size);
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
-    const space = ctx.measureText(' ').width;
+    // Some display faces ship a very narrow space; keep words clearly apart.
+    const space = Math.max(ctx.measureText(' ').width, size * 0.26);
     const items = words.map(w => {
       const s = st.upper ? w.w.toUpperCase() : w.w;
       return { s, wd: ctx.measureText(s).width, start: w.start, end: w.end };
@@ -455,6 +457,8 @@ const Renderer = (() => {
         ctx.drawImage(src, 0, 0);
         ctx.restore();
       }
+    } else if (env.bg) {
+      env.bg(ctx, W, H);
     } else {
       ctx.fillStyle = '#16151c';
       ctx.fillRect(0, 0, W, H);
@@ -504,11 +508,12 @@ const Renderer = (() => {
     captions(ctx, P, t, W, H);
 
     if (P.progress.on && env.duration > 0) {
+      const prog = env.progress ?? t / env.duration;
       const h = P.progress.height, y = P.progress.pos === 'top' ? 0 : H - h;
       ctx.fillStyle = 'rgba(255,255,255,0.18)';
       ctx.fillRect(0, y, W, h);
       ctx.fillStyle = P.progress.color;
-      ctx.fillRect(0, y, W * clamp(t / env.duration), h);
+      ctx.fillRect(0, y, W * clamp(prog), h);
     }
 
     if (es.flash > 0) { ctx.fillStyle = `rgba(255,255,255,${clamp(es.flash)})`; ctx.fillRect(0, 0, W, H); }
